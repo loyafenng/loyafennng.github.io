@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+textarea{
+    resize: none;
+}
+p span{
+    margin-right: 10px; 
+}
+#time_notice{
+    width: 320px;
+    margin: 150px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.btn-group{
+    float: right;
+    width: 125px;
+}
+.btn-group .btn{
+    border-radius: 4px;
+}
+.btn-group .btn-default{
+    margin-right: 15px;
+}

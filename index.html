@@ -1,65 +1,30 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" href="stylesheets/github-dark.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
-
-  <title>Loyafennng.GitHub.io</title>
-  <meta name="description" content="loyafenng">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
+	<title>时间提醒</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/notice.css">
 </head>
-
 <body>
-
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Loyafennng.GitHub.io</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">loyafenng</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/loyafenng/loyafennng.github.io/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/loyafenng/loyafennng.github.io/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/loyafenng/loyafennng.github.io" class="code">View Loyafennng.GitHub.io on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h1>
-<a id="loyafennnggithubio" class="anchor" href="#loyafennnggithubio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>loyafennng.github.io</h1>
-
-<p>loyafenng</p>
-        </article>
-      </div>
-    </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/loyafenng" class="avatar"><img src="https://avatars1.githubusercontent.com/u/11678087?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/loyafenng">loyafenng</a> maintains <a href="https://github.com/loyafenng/loyafennng.github.io">Loyafennng.GitHub.io</a></p>
-
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/loyafenng/loyafennng.github.io/tarball/master" class="tar">tar</a><a href="https://github.com/loyafenng/loyafennng.github.io/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-  
+	<section id="time_notice">
+		<p><span>设置提醒主题:</span><input class="content_title" type="text" ></p>
+		<p><span>设置提醒内容:</span><textarea class="content"></textarea></p>
+		<p><span>设置持续时长:</span><input class="notice_keep" type="text" maxlength="2" value="1"></p>
+		<p><span>设置提醒时间:</span><input class="notice_time" type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">
+		<p class="btn-group"><button class="btn btn-default">取消</button><button class="btn btn-success">保存</button></p>
+	</section>
+	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="js/moment.js"></script>
+	<script type="text/javascript" src="js/combodate.js"></script>
+	<script>
+	$(function(){
+	    $('#time').combodate({
+	        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+	        minuteStep: 1
+	    });  
+	});
+	</script>
+	<!-- <script type="text/javascript" src="js/desktopnotify.js"></script> -->
+	<script type="text/javascript" src="js/notice.js"></script>
 </body>
 </html>
