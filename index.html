@@ -9,11 +9,39 @@
     </head>
     <body>
         <section id="time_notice">
-            <p><span>设置提醒主题:</span><input id="content_title" type="text" ></p>
-            <p><span>设置提醒内容:</span><textarea id="content"></textarea></p>
-            <p><span>设置持续时长:</span><input id="notice_keep" type="text" maxlength="2" value="1"></p>
-            <p><span>设置提醒时间:</span><input class="notice_time" type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">
-            <p class="btn-group"><button id="btn-default" class="btn btn-default">取消</button><button id="btn-success" class="btn btn-success">保存</button></p>
+        <div>
+            <p>
+                <span>设置提醒主题:</span>
+                <input id="content_title" type="text" >
+            </p>
+            <i class="none">请输入提醒主题</i>
+        </div>
+        <div>
+            <p>
+                <span>设置提醒内容:</span>
+                <textarea id="content"></textarea>
+            </p>
+            <i class="none">请输入提醒内容</i>
+        </div>
+        <div>
+            <p>
+                <span>设置持续时长:</span>
+                <input id="notice_keep" type="text" maxlength="2" value="1">
+            </p>
+            <i class="none">请输入持续时长</i>
+        </div>
+        <div>
+            <p>
+                <span>设置提醒时间:</span>
+                <input class="notice_time" type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">
+                <i class="none">请输入提醒时间</i>
+            </p>
+        </div>
+            <p class="btn-group">
+                <button id="btn-default" class="btn btn-default">取消</button>
+                <button id="btn-success" class="btn btn-success">保存</button>
+            </p>
+            
         </section>
 
         <button id="button">有人想加你为好友</button>
@@ -33,16 +61,25 @@
     
         <script type="text/javascript">
         if (window.Notification) {
-            var dft = document.getElementById('btn-default'), sucess = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content');
-            
+            var dft = document.getElementById('btn-default'), sucess = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content'), dur = document.getElementById('notice_keep'), time = document.getElementById('time'), duration;
             var popNotice = function() {
                 console.log(Notification.permission)
                 if (Notification.permission == "granted") {
-                    var notification = new Notification(title.innerHTML, {
-                        body: content.innerHTML,
-                        icon: 'http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg'
-                    });
-                    
+                    if(title.value != "" && content.value != ""){
+                        var notification = new Notification(title.value, {
+                            body: content.value,
+                            icon: 'img/logo.jpg'
+                        });
+
+                        clearTimeout(timer);
+                        var timer = setTimeout(function(){
+                            notification.close();
+                        },duration);
+
+                    }
+                    if(time.value ==""){
+
+                    }
                     notification.onclick = function() {
                         // text.innerHTML = '张小姐已于' + new Date().toTimeString().split(' ')[0] + '加你为好友！';
                         notification.close();    
@@ -51,12 +88,18 @@
             };
             
             sucess.onclick = function() {
-                if (Notification.permission == "granted") {
-                    popNotice();
-                } else if (Notification.permission != "denied") {
-                    Notification.requestPermission(function (permission) {
-                      popNotice();
-                    });
+                if(time.value != ""){
+                    if (Notification.permission == "granted") {
+                        duration = parseInt(dur.value) * 1000;
+                        setTimeout(function(){
+                            popNotice();
+                        },1000);
+                        
+                    } else if (Notification.permission != "denied") {
+                        Notification.requestPermission(function (permission) {
+                          popNotice();
+                        });
+                    }
                 }
             };
         } else {
