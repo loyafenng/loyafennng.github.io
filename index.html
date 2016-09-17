@@ -25,7 +25,7 @@
         </div>
         <div>
             <p>
-                <span>设置持续时长:</span>
+                <span>设置持续时长:(min)</span>
                 <input id="notice_keep" type="text" maxlength="2" value="1">
             </p>
             <i class="none">请输入持续时长</i>
@@ -61,7 +61,8 @@
     
         <script type="text/javascript">
         if (window.Notification) {
-            var dft = document.getElementById('btn-default'), sucess = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content'), dur = document.getElementById('notice_keep'), time = document.getElementById('time'), duration;
+            var dft = document.getElementById('btn-default'), sucess = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content'), dur = document.getElementById('notice_keep'), time = document.getElementById('time'), durationClose, durationOpen,opentime,nowtime,timeArr=[];
+            
             var popNotice = function() {
                 console.log(Notification.permission)
                 if (Notification.permission == "granted") {
@@ -74,7 +75,7 @@
                         clearTimeout(timer);
                         var timer = setTimeout(function(){
                             notification.close();
-                        },duration);
+                        },durationClose);
 
                     }
                     if(time.value ==""){
@@ -88,12 +89,20 @@
             };
             
             sucess.onclick = function() {
-                if(time.value != ""){
+                if(time.value != ""){ 
+                    var date = new Date();
+                    var hour = date.getHours(),
+                        minute = date.getMinutes();
+                        nowtime = hour * 60 * 60 + minute * 60;
+                    timeArr = time.value.split(":");
+                    opentime = parseInt(timeArr[0]) * 60 * 60 + parseInt(timeArr[1]) * 60;
+                    durationOpen = opentime - nowtime;
+                    durationClose = parseInt(dur.value) * 1000 * 60;
+
                     if (Notification.permission == "granted") {
-                        duration = parseInt(dur.value) * 1000;
                         setTimeout(function(){
                             popNotice();
-                        },1000);
+                        },durationOpen * 1000);
                         
                     } else if (Notification.permission != "denied") {
                         Notification.requestPermission(function (permission) {
