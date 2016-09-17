@@ -39,6 +39,9 @@ p i{
 #time_notice>div:nth-child(2){
     min-height: 80px;
 }
+#notice_keep{
+    width: 176px;
+}
 .btn-group{
     float: right;
     width: 125px;
