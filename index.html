@@ -33,7 +33,7 @@
     
         <script type="text/javascript">
         if (window.Notification) {
-            var default = document.getElementById('btn-default'), success = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content');
+            var dft = document.getElementById('btn-default'), sucess = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content');
             
             var popNotice = function() {
                 console.log(Notification.permission)
@@ -50,7 +50,7 @@
                 }    
             };
             
-            success.onclick = function() {
+            sucess.onclick = function() {
                 if (Notification.permission == "granted") {
                     popNotice();
                 } else if (Notification.permission != "denied") {
