@@ -9,11 +9,11 @@
     </head>
     <body>
         <section id="time_notice">
-            <p><span>设置提醒主题:</span><input class="content_title" type="text" ></p>
-            <p><span>设置提醒内容:</span><textarea class="content"></textarea></p>
-            <p><span>设置持续时长:</span><input class="notice_keep" type="text" maxlength="2" value="1"></p>
+            <p><span>设置提醒主题:</span><input id="content_title" type="text" ></p>
+            <p><span>设置提醒内容:</span><textarea id="content"></textarea></p>
+            <p><span>设置持续时长:</span><input id="notice_keep" type="text" maxlength="2" value="1"></p>
             <p><span>设置提醒时间:</span><input class="notice_time" type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime">
-            <p class="btn-group"><button class="btn btn-default">取消</button><button class="btn btn-success">保存</button></p>
+            <p class="btn-group"><button id="btn-default" class="btn btn-default">取消</button><button id="btn-success" class="btn btn-success">保存</button></p>
         </section>
 
         <button id="button">有人想加你为好友</button>
@@ -33,24 +33,24 @@
     
         <script type="text/javascript">
         if (window.Notification) {
-            var button = document.getElementById('button'), text = document.getElementById('text');
+            var default = document.getElementById('btn-default'), success = document.getElementById('btn-success'), title = document.getElementById('content_title'), content = document.getElementById('content');
             
             var popNotice = function() {
                 console.log(Notification.permission)
                 if (Notification.permission == "granted") {
-                    var notification = new Notification("Hi，帅哥：", {
-                        body: '可以加你为好友吗？',
+                    var notification = new Notification(title.innerHTML, {
+                        body: content.innerHTML,
                         icon: 'http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg'
                     });
                     
                     notification.onclick = function() {
-                        text.innerHTML = '张小姐已于' + new Date().toTimeString().split(' ')[0] + '加你为好友！';
+                        // text.innerHTML = '张小姐已于' + new Date().toTimeString().split(' ')[0] + '加你为好友！';
                         notification.close();    
                     };
                 }    
             };
             
-            button.onclick = function() {
+            success.onclick = function() {
                 if (Notification.permission == "granted") {
                     popNotice();
                 } else if (Notification.permission != "denied") {
